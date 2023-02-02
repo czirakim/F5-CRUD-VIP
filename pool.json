@@ -1,0 +1,29 @@
+[
+	{ 
+		"name": "pool1", 
+		"loadBalancingMode": "least-connections-node", 
+		"monitor": "/Common/tcp", 
+		"members": [ 
+			{
+				"name": "8.8.8.8:10779"
+				
+			} ,
+			{	
+				"name": "1.1.1.1:80"
+			}
+		] 
+ 	},
+	{ 
+		"name": "pool2", 
+		"loadBalancingMode": "round-robin", 
+		"monitor": "/Common/tcp", 
+		"members": [ 
+			{
+				"name": "9.9.9.9:10779"
+			},
+			{
+				"name": "2.2.2.2:443"
+			} 
+		] 
+ 	}
+]	
