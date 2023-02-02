@@ -1,11 +1,12 @@
 import requests
-from rich import print
 import os
 import json
 from create_pool import create_pool
 import urllib3
+from logger import logger
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+logger = logger()
 
 """
 Create Virtual Server
@@ -29,14 +30,22 @@ def create_vip():
     # Parse the JSON data
     items = json.loads(data)
     for item in items:
-        print(item)
         payload = json.dumps(item)
-        response = requests.request("POST", url, headers=headers, data=payload, verify=False)
-        response.raise_for_status()
+        pool = item['pool']
+        try:
+            response = requests.request("POST", url, headers=headers, data=payload, verify=False)
+            response.raise_for_status()
+        except requests.exceptions.HTTPError:
+            if (response.status_code == 409):
+                logger.error(f"Virtual Server {item['name']} already exists so we can't override it.")
+        except requests.exceptions.RequestException as e:
+            logger.error("An error occurred while making the request: {e}")
+        else:
+            logger.info(f"Virtual Server {item['name']} --> {pool} has been created.")
 
 
 if __name__ == "__main__":
-    create_pool()
-#    create_vip()
+    create_pool(logger)
+    create_vip()
 #    import ipdb
 #    ipdb.set_trace()
