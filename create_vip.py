@@ -37,6 +37,6 @@ def create_vip():
 
 if __name__ == "__main__":
     create_pool()
-    create_vip()
+#    create_vip()
 #    import ipdb
 #    ipdb.set_trace()
