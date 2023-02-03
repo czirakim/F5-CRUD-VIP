@@ -1,6 +1,5 @@
 [
     {
-        "kind": "tm:ltm:virtual:virtualstate",
         "name": "VIP1",
         "partition": "Common",
         "fullPath": "/Common/VIP1",
@@ -27,7 +26,7 @@
         "translatePort": "enabled",
         "vlansDisabled": true,
         "profiles": [
-            { "name": "tcp" , "context":"clientside" },
+            { "name": "tcp-wan-optimized" , "context":"clientside" },
             { "name": "tcp-lan-optimized" , "context":"serverside" },
             { "name": "http"}
                     ],
@@ -37,7 +36,6 @@
                 ]
     },
     {
-        "kind": "tm:ltm:virtual:virtualstate",
         "name": "VIP2",
         "partition": "Common",
         "fullPath": "/Common/VIP2",

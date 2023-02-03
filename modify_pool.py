@@ -11,6 +11,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
 
+# F5 device
 IP_ADDRESS = "192.168.88.100"
 
 
@@ -23,7 +24,7 @@ def modify_pool():
              }
 
     # Open the file for reading
-    with open('pool_changes.json', 'r') as file:
+    with open('pool.json', 'r') as file:
         # Read the contents of the file
         data = file.read()
 

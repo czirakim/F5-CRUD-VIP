@@ -7,6 +7,7 @@ import os
 import json
 import urllib3
 from logger import logger
+from rich import print_json, print
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
@@ -45,7 +46,8 @@ def list_vip():
         except requests.exceptions.RequestException as e:
             logger.error(f"An error occurred while making the request: {e}")
         else:
-            print(f"VIP name: {vip_name} {reply}")
+            print(f"[yellow bold]\n Pool name: {vip_name}[/yellow bold]")
+            print_json(response.text)
 
 
 if __name__ == "__main__":

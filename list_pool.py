@@ -1,5 +1,5 @@
 """
-Modify pool
+List pool
 """
 
 import requests
@@ -7,11 +7,12 @@ import os
 import json
 import urllib3
 from logger import logger
-from rich import print
+from rich import print_json, print
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
 
+# F5 device
 IP_ADDRESS = "192.168.88.100"
 
 
@@ -38,14 +39,14 @@ def list_pool():
         try:
             response = requests.request("GET", url, headers=headers, verify=False)
             response.raise_for_status()
-            reply = json.dumps(json.loads(response.text), indent=4)
         except requests.exceptions.HTTPError:
             if (response.status_code == 403 or response.status_code == 400):
                 logger.error(f"An error occurred while making the request: {response.text}")
         except requests.exceptions.RequestException as e:
             logger.error(f"An error occurred while making the request: {e}")
         else:
-            print(f"Pool name: {pool_name} {reply}")
+            print(f"[yellow bold]\n Pool name: {pool_name}[/yellow bold]")
+            print_json(response.text)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
 
+# F5 device
 IP_ADDRESS = "192.168.88.100"
 
 
