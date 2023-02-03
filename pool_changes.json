@@ -1,7 +1,7 @@
 [
 	{ 
-		"name": "pool1", 
+		"name": "pool2", 
 		"loadBalancingMode": "round-robin", 
-		"monitor": "/Common/icmp"
+		"monitor": "/Common/tcp"
  	}
 ]    

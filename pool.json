@@ -1,7 +1,7 @@
 [
 	{ 
 		"name": "pool1", 
-		"loadBalancingMode": "least-connections-node", 
+		"loadBalancingMode": "round-robin", 
 		"monitor": "/Common/tcp", 
 		"members": [ 
 			{
@@ -15,14 +15,14 @@
  	},
 	{ 
 		"name": "pool2", 
-		"loadBalancingMode": "round-robin", 
+		"loadBalancingMode": "ratio-node", 
 		"monitor": "/Common/tcp", 
 		"members": [ 
 			{
 				"name": "9.9.9.9:10779"
 			},
 			{
-				"name": "2.2.2.2:443"
+				"name": "2.2.2.1:80"
 			} 
 		] 
  	}

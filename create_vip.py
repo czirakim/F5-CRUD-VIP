@@ -29,6 +29,8 @@ def create_vip():
 
     # Parse the JSON data
     items = json.loads(data)
+
+    # make the request and log the response
     for item in items:
         payload = json.dumps(item)
         pool = item['pool']
@@ -37,9 +39,9 @@ def create_vip():
             response.raise_for_status()
         except requests.exceptions.HTTPError:
             if (response.status_code == 409):
-                logger.error(f"Virtual Server {item['name']} already exists so we can't override it.")
+                logger.error(f"Virtual Server {item['name']} already exists so we can't override it. ### Use modify* scripts. ###")
         except requests.exceptions.RequestException as e:
-            logger.error("An error occurred while making the request: {e}")
+            logger.error(f"An error occurred while making the request: {e}")
         else:
             logger.info(f"Virtual Server {item['name']} --> {pool} has been created.")
 
