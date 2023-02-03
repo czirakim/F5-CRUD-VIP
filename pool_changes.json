@@ -1,7 +1,7 @@
 [
 	{ 
 		"name": "pool2", 
-		"loadBalancingMode": "round-robin", 
+		"loadBalancingMode": "ratio-node", 
 		"monitor": "/Common/tcp"
  	}
 ]    

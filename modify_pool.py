@@ -11,8 +11,10 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
 
+IP_ADDRESS = "192.168.88.100"
 
-def modify_pool(logger):
+
+def modify_pool():
 
     API_string = os.environ.get('Authorization_string')
     headers = {
@@ -21,7 +23,7 @@ def modify_pool(logger):
              }
 
     # Open the file for reading
-    with open('pool.json', 'r') as file:
+    with open('pool_changes.json', 'r') as file:
         # Read the contents of the file
         data = file.read()
 
@@ -32,7 +34,7 @@ def modify_pool(logger):
     for item in items:
         payload = json.dumps(item)
         pool_name = item['name']
-        url = f"https://192.168.88.100/mgmt/tm/ltm/pool/{pool_name}"
+        url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/pool/{pool_name}"
         try:
             response = requests.request("PUT", url, headers=headers, data=payload, verify=False)
             response.raise_for_status()
@@ -46,4 +48,4 @@ def modify_pool(logger):
 
 
 if __name__ == "__main__":
-    modify_pool(logger)
+    modify_pool()

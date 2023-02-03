@@ -9,10 +9,10 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-def create_pool(logger):
+def create_pool(logger, IP_ADDRESS):
 
     API_string = os.environ.get('Authorization_string')
-    url = "https://192.168.88.100/mgmt/tm/ltm/pool"
+    url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/pool"
     headers = {
         'Authorization': f'Basic {API_string}',
         'Content-Type': 'application/json'

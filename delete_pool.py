@@ -9,8 +9,7 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-
-def delete_pool(logger):
+def delete_pool(logger, IP_ADDRESS):
 
     API_string = os.environ.get('Authorization_string')
     headers = {
@@ -30,7 +29,7 @@ def delete_pool(logger):
     for item in items:
         payload = json.dumps(item)
         pool_name = item['name']
-        url = f"https://192.168.88.100/mgmt/tm/ltm/pool/{pool_name}"
+        url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/pool/{pool_name}"
         try:
             response = requests.request("DELETE", url, headers=headers, data=payload, verify=False)
             response.raise_for_status()

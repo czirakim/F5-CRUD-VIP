@@ -12,6 +12,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
 
+IP_ADDRESS = "192.168.88.100"
+
 
 def delete_vip(logger):
 
@@ -34,7 +36,7 @@ def delete_vip(logger):
     for item in items:
         payload = json.dumps(item)
         vip_name = item['name']
-        url = f"https://192.168.88.100/mgmt/tm/ltm/virtual/{vip_name}"
+        url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/virtual/{vip_name}"
         try:
             response = requests.request("DELETE", url, headers=headers, data=payload, verify=False)
             response.raise_for_status()
@@ -49,4 +51,4 @@ def delete_vip(logger):
 
 if __name__ == "__main__":
     delete_vip(logger)
-    delete_pool(logger)
+    delete_pool(logger, IP_ADDRESS)

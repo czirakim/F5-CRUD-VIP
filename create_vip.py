@@ -1,3 +1,8 @@
+"""
+Create Virtual Server
+"""
+
+
 import requests
 import os
 import json
@@ -8,15 +13,14 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
 
-"""
-Create Virtual Server
-"""
+
+IP_ADDRESS = "192.168.88.100"
 
 
 def create_vip():
 
     API_string = os.environ.get('Authorization_string')
-    url = "https://192.168.88.100/mgmt/tm/ltm/virtual"
+    url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/virtual"
     headers = {
         'Authorization': f'Basic {API_string}',
         'Content-Type': 'application/json'
@@ -47,7 +51,7 @@ def create_vip():
 
 
 if __name__ == "__main__":
-    create_pool(logger)
+    create_pool(logger, IP_ADDRESS)
     create_vip()
 #    import ipdb
 #    ipdb.set_trace()

@@ -14,7 +14,7 @@ logger = logger()
 IP_ADDRESS = "192.168.88.100"
 
 
-def modify_vip():
+def list_vip():
 
     API_string = os.environ.get('Authorization_string')
 
@@ -33,20 +33,20 @@ def modify_vip():
 
     # make the request and log the response
     for item in items:
-        payload = json.dumps(item)
         vip_name = item['name']
         url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/virtual/{vip_name}"
         try:
-            response = requests.request("PUT", url, headers=headers, data=payload, verify=False)
+            response = requests.request("GET", url, headers=headers, verify=False)
             response.raise_for_status()
+            reply = json.dumps(json.loads(response.text), indent=4)
         except requests.exceptions.HTTPError:
             if (response.status_code == 404 or response.status_code == 400):
                 logger.error(f"An error occurred while making the request:  {response.text}")
         except requests.exceptions.RequestException as e:
             logger.error(f"An error occurred while making the request: {e}")
         else:
-            logger.info(f"Virtual Server {item['name']} has been modified.")
+            print(f"VIP name: {vip_name} {reply}")
 
 
 if __name__ == "__main__":
-    modify_vip()
+    list_vip()
