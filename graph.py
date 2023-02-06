@@ -30,15 +30,19 @@ def add_obj():
     # vips
     for it in itemsY:
         vips = vips + 1
-        label = it['name']
-        net.add_node(vips, label=label, color='#3155a8')
+        label1 = it['name']
         string = it['pool'].replace('/Common/', '')
+        label2 = it['destination'].replace('/Common/', '')
+        label = f"{label1} \n {label2}"
+        net.add_node(vips, label=label, color='#3155a8')
 
         # vip --> pool
         for item in items:
             if (string == item['name']):
                 pools = pools + 1
-                label = item['name']
+                label1 = item['name']
+                label2 = item['loadBalancingMode']
+                label = f"{label1} \n {label2}"
                 net.add_node(pools, label=label, color='#3da831')
                 members = item['members']
                 net.add_edges([(vips, pools, 5)])
@@ -46,12 +50,13 @@ def add_obj():
                 # pool --> nodes
                 for member in members:
                     nodes = nodes + 1
-                    label2 = member['name']
-                    net.add_node(nodes, label=label2, color='#9a31a8')
+                    label = member['name']
+                    net.add_node(nodes, label=label, color='#9a31a8')
                     net.add_edges([(pools, nodes, 2)])
 
 
 if __name__ == "__main__":
     add_obj()
+    net.show_buttons(filter_=True)
     net.show('nodes.html')
     net.show('edges.html')
