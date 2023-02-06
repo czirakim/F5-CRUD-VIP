@@ -1,5 +1,5 @@
 """
-Modify Virtual Server
+List Virtual Server
 """
 
 import requests

@@ -2,7 +2,7 @@
 	{ 
 		"name": "pool1", 
 		"loadBalancingMode": "round-robin", 
-		"monitor": "/Common/tcp_half_open", 
+		"monitor": "/Common/tcp", 
 		"members": [ 
 			{
 				"name": "8.8.8.8:80"
