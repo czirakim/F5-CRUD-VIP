@@ -28,7 +28,8 @@
         "profiles": [
             { "name": "tcp-wan-optimized" , "context":"clientside" },
             { "name": "tcp-lan-optimized" , "context":"serverside" },
-            { "name": "http"}
+            { "name": "http_X-forward-for"},
+            { "name": "httpcompression-optimal"}
                     ],
         "rules": [
                 "/Common/example_uri_1",
@@ -64,7 +65,7 @@
         "profiles": [
             { "name": "tcp-wan-optimized" , "context":"clientside" },
             { "name": "tcp-lan-optimized" , "context":"serverside" },
-            { "name": "http" }
+            { "name": "http_max_requests" }
                     ],
         "rules": [
                 "/Common/example_uri_1",
