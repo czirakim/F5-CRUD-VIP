@@ -32,9 +32,8 @@
             { "name": "httpcompression-optimal"}
                     ],
         "rules": [
-                "/Common/example_uri_1",
-                "/Common/hsl-irule"
-                ]
+                "example_rule_1"
+                 ]
     },
     {
         "name": "VIP2",
@@ -68,8 +67,7 @@
             { "name": "http_max_requests" }
                     ],
         "rules": [
-                "/Common/example_uri_1",
-                "/Common/hsl-irule"
+                "example_rule_2"
             ]
     }
 ]

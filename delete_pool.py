@@ -31,7 +31,7 @@ def delete_pool(logger, IP_ADDRESS):
         pool_name = item['name']
         url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/pool/{pool_name}"
         try:
-            response = requests.request("DELETE", url, headers=headers, data=payload, verify=False)
+            response = requests.request("DELETE", url, headers=headers, verify=False)
             response.raise_for_status()
         except requests.exceptions.HTTPError:
             if (response.status_code == 404 or response.status_code == 400):

@@ -39,6 +39,8 @@ def create_pool(logger, IP_ADDRESS):
         except requests.exceptions.HTTPError:
             if (response.status_code == 409):
                 logger.error(f"Pool {item['name']} already exists so we can't override it. ### Use modify* scripts. ###")
+            elif (response.status_code == 404):
+                logger.error(f"There is a missing object that you need to configure first. {response.text}")
         except requests.exceptions.RequestException as e:
             logger.error(f"An error occurred while making the request: {e}")
         else:

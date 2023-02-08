@@ -39,7 +39,7 @@ def delete_vip(logger):
         vip_name = item['name']
         url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/virtual/{vip_name}"
         try:
-            response = requests.request("DELETE", url, headers=headers, data=payload, verify=False)
+            response = requests.request("DELETE", url, headers=headers, verify=False)
             response.raise_for_status()
         except requests.exceptions.HTTPError:
             if (response.status_code == 404 or response.status_code == 400):

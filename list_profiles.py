@@ -1,5 +1,5 @@
 """
-Create profiles
+list profiles
 """
 
 import requests
@@ -7,6 +7,7 @@ import os
 import json
 import urllib3
 from logger import logger
+from rich import print_json, print
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logger()
@@ -15,7 +16,7 @@ logger = logger()
 IP_ADDRESS = "192.168.88.100"
 
 
-def create_profile():
+def list_profile():
     API_string = os.environ.get('Authorization_string')
     base_url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/profile/"
     headers = {
@@ -36,20 +37,18 @@ def create_profile():
         profiles = item['profiles']
         type = item['type']
         for profile in profiles:
-            payload = json.dumps(profile)
             try:
-                response = requests.request("POST", f"{base_url}{type}", headers=headers, data=payload, verify=False)
+                response = requests.request("GET", f"{base_url}{type}/{profile['name']}", headers=headers, verify=False)
                 response.raise_for_status()
             except requests.exceptions.HTTPError:
-                if (response.status_code == 409):
-                    logger.error(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
-                elif (response.status_code == 404):
-                    logger.error(f"There is a missing object that you need to configure first. {response.text}")    
+                if (response.status_code == 404 or response.status_code == 400):
+                    logger.error(f"An error occurred while making the request:  {response.text}")
             except requests.exceptions.RequestException as e:
                 logger.error(f"An error occurred while making the request: {e}")
             else:
-                logger.info(f"Profile {profile['name']} has been created. ")
+                print(f"[yellow bold]\n Profile: {profile['name']}[/yellow bold]")
+                print_json(response.text)
 
 
 if __name__ == "__main__":
-    create_profile()
+    list_profile()

@@ -33,7 +33,7 @@
                 "kind": "tm:ltm:profile:http-compression:http-compressionstate",
                 "name": "httpcompression-optimal",
                 "partition": "Common",
-                "gzipLevel": 1,
+                "gzipLevel": 6,
                 "varyHeader": "enabled"
             }
         ]

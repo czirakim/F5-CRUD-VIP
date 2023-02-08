@@ -1,0 +1,14 @@
+[
+    {
+        "name": "example_rule_1",
+        "apiAnonymous": "when HTTP_REQUEST { \n   if { ([HTTP::host] == \"www.xyz.com\") and ([string tolower [HTTP::uri]] contains \"test1\") }{      
+        HTTP::respond 403 content \"You don't have authorization to view this page. Access Denied\" noserver Content-Type text/html Connection Close Cache-Control no-cache        
+        log local0. \"deny URI: [HTTP::uri]\" } \n  } "
+    },
+    {
+        "name": "example_rule_2",
+        "apiAnonymous": "when HTTP_REQUEST { \n   if { ([HTTP::host] == \"www.abc.com\") and ([string tolower [HTTP::uri]] contains \"test2\") }{       
+        HTTP::respond 403 content \"You don't have authorization to view this page. Access Denied\" noserver Content-Type text/html Connection Close Cache-Control no-cache       
+        log local0. \"deny URI: [HTTP::uri]\" } \n  } "
+    }
+]
