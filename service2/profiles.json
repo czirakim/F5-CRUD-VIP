@@ -1,0 +1,19 @@
+[
+    {
+        "type": "http",
+        "profiles": [
+            {
+                "kind": "tm:ltm:profile:http:httpstate",
+                "name": "http_max_requests",
+                "partition": "Common",
+                "defaultsFrom": "/Common/http",
+                "description": "custom http profile for max requests",
+                "oneconnectTransformations": "enabled",
+                "proxyType": "reverse",
+                "enforcement": {
+                    "maxRequests": 100
+                }
+            }
+        ]
+    }    
+]

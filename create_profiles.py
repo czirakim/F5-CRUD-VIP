@@ -4,15 +4,27 @@ Create profiles
 
 import requests
 import os
+import sys
 import json
 import urllib3
 from logger import logger
+import logging
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-logger = logger()
+# create a logger
+logg = logging.getLogger(__name__)
+logg.setLevel(logging.INFO)
+# add the handler to the logger
+logg.addHandler(logger())
+
 
 # F5 device
 IP_ADDRESS = "192.168.88.100"
+
+# Get the current working directory and build the path for teh json file
+cwd = os.getcwd()
+path = f"{cwd}/{sys.argv[1]}"
+data_file = f"{path}/profiles.json"
 
 
 def create_profile():
@@ -24,7 +36,7 @@ def create_profile():
              }
 
     # Open the file for reading
-    with open('profiles.json', 'r') as file:
+    with open(f'{data_file}', 'r') as file:
         # Read the contents of the file
         data = file.read()
 
@@ -42,13 +54,13 @@ def create_profile():
                 response.raise_for_status()
             except requests.exceptions.HTTPError:
                 if (response.status_code == 409):
-                    logger.error(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
-                elif (response.status_code == 404):
-                    logger.error(f"There is a missing object that you need to configure first. {response.text}")    
+                    logg.error(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
+                elif (response.status_code == 404 or response.status_code == 400):
+                    logg.error(f"There is a missing object that you need to configure first. {response.text}")
             except requests.exceptions.RequestException as e:
-                logger.error(f"An error occurred while making the request: {e}")
+                logg.error(f"An error occurred while making the request: {e}")
             else:
-                logger.info(f"Profile {profile['name']} has been created. ")
+                logg.info(f"Profile {profile['name']} has been created. ")
 
 
 if __name__ == "__main__":

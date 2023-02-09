@@ -4,15 +4,27 @@ List Virtual Server
 
 import requests
 import os
+import sys
 import json
 import urllib3
 from logger import logger
+import logging
 from rich import print_json, print
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-logger = logger()
+# create a logger
+logg = logging.getLogger(__name__)
+logg.setLevel(logging.INFO)
+# add the handler to the logger
+logg.addHandler(logger())
 
+# F5 device
 IP_ADDRESS = "192.168.88.100"
+
+# Get the current working directory and build the path for teh json file
+cwd = os.getcwd()
+path = f"{cwd}/{sys.argv[1]}"
+data_file = f"{path}/virtual.json"
 
 
 def list_vip():
@@ -25,7 +37,7 @@ def list_vip():
              }
 
     # Open the file for reading
-    with open('virtual.json', 'r') as file:
+    with open(f'{data_file}', 'r') as file:
         # Read the contents of the file
         data = file.read()
 
@@ -39,14 +51,13 @@ def list_vip():
         try:
             response = requests.request("GET", url, headers=headers, verify=False)
             response.raise_for_status()
-            reply = json.dumps(json.loads(response.text), indent=4)
         except requests.exceptions.HTTPError:
             if (response.status_code == 404 or response.status_code == 400):
-                logger.error(f"An error occurred while making the request:  {response.text}")
+                logg.error(f"An error occurred while making the request:  {response.text}")
         except requests.exceptions.RequestException as e:
-            logger.error(f"An error occurred while making the request: {e}")
+            logg.error(f"An error occurred while making the request: {e}")
         else:
-            print(f"[yellow bold]\n Pool name: {vip_name}[/yellow bold]")
+            print(f"[yellow bold]\n Virtual Server name: {vip_name}[/yellow bold]")
             print_json(response.text)
 
 

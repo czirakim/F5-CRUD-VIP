@@ -4,15 +4,25 @@ Modify pool
 
 import requests
 import os
+import sys
 import json
 import urllib3
 from logger import logger
+import logging
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-logger = logger()
+# create a logger
+logg = logging.getLogger(__name__)
+logg.setLevel(logging.INFO)
+# add the handler to the logger
+logg.addHandler(logger())
 
 # F5 device
 IP_ADDRESS = "192.168.88.100"
+# Get the current working directory and build the path for teh json file
+cwd = os.getcwd()
+path = f"{cwd}/{sys.argv[1]}"
+data_file = f"{path}/pool.json"
 
 
 def modify_pool():
@@ -24,7 +34,7 @@ def modify_pool():
              }
 
     # Open the file for reading
-    with open('pool.json', 'r') as file:
+    with open(f'{data_file}', 'r') as file:
         # Read the contents of the file
         data = file.read()
 
@@ -40,12 +50,12 @@ def modify_pool():
             response = requests.request("PUT", url, headers=headers, data=payload, verify=False)
             response.raise_for_status()
         except requests.exceptions.HTTPError:
-            if (response.status_code == 403 or response.status_code == 400):
-                logger.error(f"An error occurred while making the request: {response.text}")
+            if (response.status_code == 404 or response.status_code == 400):
+                logg.error(f"An error occurred while making the request: {response.text}")
         except requests.exceptions.RequestException as e:
-            logger.error(f"An error occurred while making the request: {e}")
+            logg.error(f"An error occurred while making the request: {e}")
         else:
-            logger.info(f"Pool {item['name']} has been modified.")
+            logg.info(f"Pool {item['name']} has been modified.")
 
 
 if __name__ == "__main__":

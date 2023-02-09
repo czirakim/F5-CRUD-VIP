@@ -1,0 +1,37 @@
+[    
+    {
+        "name": "VIP2",
+        "partition": "Common",
+        "fullPath": "/Common/VIP2",
+        "addressStatus": "yes",
+        "autoLasthop": "default",
+        "cmpEnabled": "yes",
+        "connectionLimit": 0,
+        "destination": "/Common/10.0.0.112:80",
+        "enabled": true,
+        "gtmScore": 0,
+        "ipProtocol": "tcp",
+        "mask": "255.255.255.255",
+        "mirror": "disabled",
+        "mobileAppTunnel": "disabled",
+        "nat64": "disabled",
+        "pool": "/Common/pool2",
+        "source": "0.0.0.0/0",
+        "sourceAddressTranslation": {
+                "type": "automap"
+            },
+        "sourcePort": "preserve",
+        "synCookieStatus": "not-activated",
+        "translateAddress": "enabled",
+        "translatePort": "enabled",
+        "vlansDisabled": true,
+        "profiles": [
+            { "name": "tcp-wan-optimized" , "context":"clientside" },
+            { "name": "tcp-lan-optimized" , "context":"serverside" },
+            { "name": "http_max_requests" }
+                    ],
+        "rules": [
+                "example_rule_2"
+            ]
+    }
+]

@@ -1,7 +1,13 @@
 from pyvis.network import Network
+import os
+import sys
 import json
 
 net = Network()
+
+# Get the current working directory and build the path for teh json file
+cwd = os.getcwd()
+path = f"{cwd}/{sys.argv[1]}"
 
 
 # add pools,nodes and vips
@@ -11,7 +17,8 @@ def add_obj():
     vips = 1000
     net.repulsion(node_distance=100, spring_length=200)
 
-    with open('pool.json', 'r') as file:
+    pool_file = f"{path}/pool.json"
+    with open(f'{pool_file}', 'r') as file:
         # Read the contents of the file
         data = file.read()
     file.close()
@@ -19,7 +26,7 @@ def add_obj():
     # Parse the JSON data
     items = json.loads(data)
 
-    with open('virtual.json', 'r') as file:
+    with open(f'{path}/virtual.json', 'r') as file:
         # Read the contents of the file
         data = file.read()
     file.close()
@@ -58,5 +65,5 @@ def add_obj():
 if __name__ == "__main__":
     add_obj()
     net.show_buttons(filter_=True)
-    net.show('nodes.html')
-    net.show('edges.html')
+#    net.show('nodes.html')
+    net.show(f'{sys.argv[1]}/edges_{sys.argv[1]}.html')

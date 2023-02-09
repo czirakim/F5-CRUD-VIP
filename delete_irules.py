@@ -4,16 +4,26 @@ delete irule
 
 import requests
 import os
-import json
+import sys
 import urllib3
 from logger import logger
+import logging
 import multiline
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-logger = logger()
+# create a logger
+logg = logging.getLogger(__name__)
+logg.setLevel(logging.INFO)
+# add the handler to the logger
+logg.addHandler(logger())
 
 # F5 device
 IP_ADDRESS = "192.168.88.100"
+
+# Get the current working directory and build the path for teh json file
+cwd = os.getcwd()
+path = f"{cwd}/{sys.argv[1]}"
+data_file = f"{path}/irules.json"
 
 
 def delete_irule():
@@ -26,7 +36,7 @@ def delete_irule():
              }
 
     # Open the file for reading
-    with open('irules.json', 'r') as file:
+    with open(f'{data_file}', 'r') as file:
         # Read the contents of the file
         data = file.read()
 
@@ -35,17 +45,16 @@ def delete_irule():
 
     # make the request and log the response
     for item in items:
-        payload = json.dumps(item)
         try:
             response = requests.request("DELETE", f"{url}/{item['name']}", headers=headers, verify=False)
             response.raise_for_status()
         except requests.exceptions.HTTPError:
             if (response.status_code == 404 or response.status_code == 400):
-                logger.error(f"An error occurred while making the request: {response.text}")
+                logg.error(f"An error occurred while making the request: {response.text}")
         except requests.exceptions.RequestException as e:
-            logger.error(f"An error occurred while making the request: {e}")
+            logg.error(f"An error occurred while making the request: {e}")
         else:
-            logger.info(f"irule {item['name']} has been DELETED.")
+            logg.info(f"irule {item['name']} has been DELETED.")
 
 
 if __name__ == "__main__":
