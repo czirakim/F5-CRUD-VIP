@@ -1,8 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.9'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+           label 'python-slave'
         }
     }
     stages {
