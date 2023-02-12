@@ -1,7 +1,9 @@
 pipeline {
-   agent {
-        label 'python-slave'
-    }
+   agent { 
+    any {
+         image 'python-agent' args '/bin/bash' 
+         } 
+         }
     stages {
         stage('Build') {
             steps {
