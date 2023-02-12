@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                 sh 'python create_vip.py service1'
+                sh 'python --vesrion'
             }
         }
         
