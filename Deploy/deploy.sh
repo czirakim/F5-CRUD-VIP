@@ -1,0 +1,1 @@
+python3 create_profiles.py serivice1

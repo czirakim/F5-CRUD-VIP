@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                sh 'python3 --version'
+                sh 'bash $WORKSPACE/Deploy/deploy.sh'
             }
         }
         
