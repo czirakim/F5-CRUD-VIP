@@ -1,9 +1,5 @@
 pipeline {
-   agent { 
-    docker {
-        image 'python-slave' args '/bin/bash' 
-        } 
-         }
+    agent any
     stages {
         stage('Build') {
             steps {
@@ -20,7 +16,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                sh 'bash $WORKSPACE/Deploy/deploy.sh'
+                'python3 create_profiles.py service1'
             }
         }
         
