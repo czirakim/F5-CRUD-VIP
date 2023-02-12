@@ -5,7 +5,7 @@ FROM ubuntu:latest
 #SHELL ["/bin/bash", "-c"]
 
 # This line adds the Jenkins user to the /etc/sudoers file, allowing it to run sudo commands without a password prompt
-RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+#RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
 
@@ -17,14 +17,14 @@ RUN apt-get update && \
 
 
 # Install Jenkins
-RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | gpg --dearmor -o /usr/share/keyrings/jenkins.gpg && \
-    sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' && \
-    apt update && \
-    apt-get install -y jenkins 
+#RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | gpg --dearmor -o /usr/share/keyrings/jenkins.gpg && \
+#    sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' && \
+#    apt update && \
+#    apt-get install -y jenkins 
 
 
 # start jenkins
-RUN service jenkins start  
+#RUN service jenkins start  
 
 # Set the working directory to /app
 WORKDIR /app

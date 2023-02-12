@@ -1,6 +1,6 @@
 pipeline {
    agent {
-        docker { image 'python' }
+        label 'python-slave'
     }
     stages {
         stage('Build') {
