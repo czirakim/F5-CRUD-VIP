@@ -1,10 +1,6 @@
 pipeline {
    agent {
-        docker {
-            image 'python'
-            registryUrl 'https://registry.hub.docker.com'
-            args '--network host -u root:root'
-        }
+        docker { image 'python' }
     }
     stages {
         stage('Build') {
