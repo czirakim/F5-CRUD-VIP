@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                sh 'bash python --version'
+                sh 'bash python3 --version'
             }
         }
         
