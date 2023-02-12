@@ -11,7 +11,6 @@ FROM ubuntu:latest
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y wget && \
     apt-get install -y default-jre && \
     apt-get install -y python3.10 python3-pip
 
@@ -36,7 +35,7 @@ COPY requirements.txt /app/
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the files to the image
-COPY . /app/
+#COPY . /app/
 
 # Expose Jenkins on port 8080
 #EXPOSE 8080

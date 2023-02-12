@@ -1,7 +1,7 @@
 pipeline {
    agent { 
     any {
-         image 'python-agent' args '/bin/bash' 
+         image 'python-slave' args '/bin/bash' 
          } 
          }
     stages {
