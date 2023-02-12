@@ -16,7 +16,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                sh 'bash python3 create_profiles.py service1'
             }
         }
         
