@@ -1,8 +1,8 @@
 pipeline {
    agent { 
-    any {
-         image 'python-slave' args '/bin/bash' 
-         } 
+    docker {
+        image 'python-slave' args '/bin/bash' 
+        } 
          }
     stages {
         stage('Build') {
