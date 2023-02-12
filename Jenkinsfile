@@ -1,7 +1,11 @@
 pipeline {
-    agent {
-        label 'python-slave'
+   agent {
+        docker {
+            image 'python'
+            registryUrl 'https://registry.hub.docker.com'
+            args '--network host -u root:root'
         }
+    }
     stages {
         stage('Build') {
             steps {
