@@ -20,6 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
+                 sh 'python3 create_vip.py'
             }
         }
         
