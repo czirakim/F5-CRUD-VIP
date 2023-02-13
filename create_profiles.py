@@ -53,7 +53,7 @@ def create_profile():
             payload = json.dumps(profile)
             print(payload)
             try:
-                response = requests.request("POST", f"{base_url}{type}", headers=headers, data=payload, verify=False)
+                response = requests.post(f"{base_url}{type}", headers=headers, data=payload, verify=False)
                 response.raise_for_status()
                 print(response.text)
             except requests.exceptions.HTTPError:
