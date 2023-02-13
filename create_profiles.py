@@ -52,19 +52,20 @@ def create_profile():
             payload = json.dumps(profile)
             try:
                 response = requests.post(f"{base_url}{type}", headers=headers, data=payload, verify=False)
-                response.raise_for_status()
                 print(response.text)
+                response.raise_for_status()
+                
             except requests.exceptions.HTTPError:
                 if (response.status_code == 409):
                     logg.error(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
                 elif (response.status_code == 404 or response.status_code == 400):
-                    logg.error(f"There is a missing object that you need to configure first. {response.text}")
+ #                   logg.error(f"There is a missing object that you need to configure first. {response.text}")
                     print(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
             except requests.exceptions.RequestException as e:
-                logg.error(f"An error occurred while making the request: {e}")
+#                logg.error(f"An error occurred while making the request: {e}")
                 print(f"An error occurred while making the request: {e}")
             else:
-                logg.info(f"Profile {profile['name']} has been created. ")
+                #logg.info(f"Profile {profile['name']} has been created. ")
                 print(f"Profile {profile['name']} has been created. ")
 
 
