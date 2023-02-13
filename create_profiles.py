@@ -26,7 +26,6 @@ cwd = os.getcwd()
 #path = f"{cwd}/{sys.argv[1]}"
 path = f"./{sys.argv[1]}"
 data_file = f"{path}/profiles.json"
-print(path)
 
 
 def create_profile():
@@ -51,9 +50,9 @@ def create_profile():
         type = item['type']
         for profile in profiles:
             payload = json.dumps(profile)
-            print(payload)
+
             try:
-                response = requests.post(f"{base_url}{type}", headers=headers, data=payload, verify=False)
+                response = requests.post(f"{base_url}{type}", headers=headers, data=payload,timeout=10, verify=False)
                 response.raise_for_status()
                 print(response.text)
             except requests.exceptions.HTTPError:
