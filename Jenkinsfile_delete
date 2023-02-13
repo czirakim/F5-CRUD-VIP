@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  parameters {
+    string(name: 'service', defaultValue: 'default_value', description: 'service parameter')
+        }
   stages {
     stage('Build') {
       steps {
@@ -20,7 +23,7 @@ pipeline {
     stage('Delete') {
       steps {
         echo 'Deploying the application...'
-        sh 'python3 $WORKSPACE/delete_profiles.py service1 2>&1'
+        sh 'python3 $WORKSPACE/delete_profiles.py ${service} 2>&1'
       }
     }
 
