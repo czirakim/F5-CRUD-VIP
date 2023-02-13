@@ -55,6 +55,7 @@ def create_profile():
             try:
                 response = requests.request("POST", f"{base_url}{type}", headers=headers, data=payload, verify=False)
                 response.raise_for_status()
+                print(response.text)
             except requests.exceptions.HTTPError:
                 if (response.status_code == 409):
                     logg.error(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
