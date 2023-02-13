@@ -17,7 +17,7 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+    stage('Delete') {
       steps {
         echo 'Deploying the application...'
         sh 'python3 $WORKSPACE/delete_profiles.py service1 2>&1'
