@@ -50,9 +50,8 @@ def create_profile():
         type = item['type']
         for profile in profiles:
             payload = json.dumps(profile)
-
             try:
-                response = requests.post(f"{base_url}{type}", headers=headers, data=payload,timeout=10, verify=False)
+                response = requests.post(f"{base_url}{type}", headers=headers, data=payload, verify=False)
                 response.raise_for_status()
                 print(response.text)
             except requests.exceptions.HTTPError:
@@ -66,6 +65,7 @@ def create_profile():
                 print(f"An error occurred while making the request: {e}")
             else:
                 logg.info(f"Profile {profile['name']} has been created. ")
+                print(f"Profile {profile['name']} has been created. ")
 
 
 if __name__ == "__main__":
