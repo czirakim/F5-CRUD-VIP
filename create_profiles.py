@@ -44,7 +44,6 @@ def create_profile():
 
     # Parse the JSON data
     items = json.loads(data)
-    print(items)
 
     # make the request and log the response
     for item in items:
@@ -52,6 +51,7 @@ def create_profile():
         type = item['type']
         for profile in profiles:
             payload = json.dumps(profile)
+            print(payload)
             try:
                 response = requests.request("POST", f"{base_url}{type}", headers=headers, data=payload, verify=False)
                 response.raise_for_status()
