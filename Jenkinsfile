@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  parameters {
+        string(name: 'MY_PARAM', defaultValue: 'default_value', description: 'A parameter')
+    }
   stages {
     stage('Build') {
       steps {
@@ -20,7 +23,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying the application...'
-        sh 'python3 $WORKSPACE/create_profiles.py service1 2>&1'
+        sh 'python3 $WORKSPACE/create_profiles.py ${params.MY_PARAM} 2>&1'
       }
     }
 
