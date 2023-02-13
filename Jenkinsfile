@@ -3,8 +3,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'Building the project...'
-      }
+        script {
+          withCredentials([string(credentialsId: 'Authorization_string', variable: 'Authorization_string')]) {
+            env.Authorization_string = "${Authorization_string}"
+                    }
+                }
+            }
     }
 
     stage('Pre-test') {

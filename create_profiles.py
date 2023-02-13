@@ -35,7 +35,7 @@ def create_profile():
         'Authorization': f'Basic {API_string}',
         'Content-Type': 'application/json'
              }
-
+    print(API_string)
     # Open the file for reading
     with open(f'{data_file}', 'r') as file:
         # Read the contents of the file
