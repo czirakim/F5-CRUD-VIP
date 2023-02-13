@@ -23,7 +23,8 @@ IP_ADDRESS = "192.168.88.100"
 
 # Get the current working directory and build the path for teh json file
 cwd = os.getcwd()
-path = f"{cwd}/{sys.argv[1]}"
+#path = f"{cwd}/{sys.argv[1]}"
+path = f"./{sys.argv[1]}"
 data_file = f"{path}/profiles.json"
 
 
