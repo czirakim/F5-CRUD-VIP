@@ -51,7 +51,6 @@ def create_profile():
             payload = json.dumps(profile)
             try:
                 response = requests.post(f"{base_url}{type}", headers=headers, data=payload, verify=False)
-                print(response.text)
                 response.raise_for_status()
             except requests.exceptions.HTTPError:
                 if (response.status_code == 409):
