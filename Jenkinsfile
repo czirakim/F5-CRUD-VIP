@@ -16,7 +16,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying the application...'
-        sh 'python3 $WORKSPACE/F5-CRUD-VIP_master/create_profiles.py service1'
+        sh 'python3 $WORKSPACE/create_profiles.py service1'
       }
     }
 
