@@ -26,6 +26,7 @@ cwd = os.getcwd()
 #path = f"{cwd}/{sys.argv[1]}"
 path = f"./{sys.argv[1]}"
 data_file = f"{path}/profiles.json"
+print(path)
 
 
 def create_profile():
@@ -43,6 +44,7 @@ def create_profile():
 
     # Parse the JSON data
     items = json.loads(data)
+    print(items)
 
     # make the request and log the response
     for item in items:
@@ -58,8 +60,10 @@ def create_profile():
                     logg.error(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
                 elif (response.status_code == 404 or response.status_code == 400):
                     logg.error(f"There is a missing object that you need to configure first. {response.text}")
+                    print(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
             except requests.exceptions.RequestException as e:
                 logg.error(f"An error occurred while making the request: {e}")
+                print(f"An error occurred while making the request: {e}")
             else:
                 logg.info(f"Profile {profile['name']} has been created. ")
 
