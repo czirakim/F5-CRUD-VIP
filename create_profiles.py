@@ -23,8 +23,8 @@ IP_ADDRESS = "192.168.88.100"
 
 # Get the current working directory and build the path for teh json file
 cwd = os.getcwd()
-#path = f"{cwd}/{sys.argv[1]}"
-path = f"./{sys.argv[1]}"
+path = f"{cwd}/{sys.argv[1]}"
+# path = f"./{sys.argv[1]}"
 data_file = f"{path}/profiles.json"
 
 
@@ -35,7 +35,6 @@ def create_profile():
         'Authorization': f'Basic {API_string}',
         'Content-Type': 'application/json'
              }
-    print(API_string)
     # Open the file for reading
     with open(f'{data_file}', 'r') as file:
         # Read the contents of the file
@@ -54,19 +53,15 @@ def create_profile():
                 response = requests.post(f"{base_url}{type}", headers=headers, data=payload, verify=False)
                 print(response.text)
                 response.raise_for_status()
-                
             except requests.exceptions.HTTPError:
                 if (response.status_code == 409):
                     logg.error(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
                 elif (response.status_code == 404 or response.status_code == 400):
- #                   logg.error(f"There is a missing object that you need to configure first. {response.text}")
-                    print(f"Profile {profile['name']} already exists so we can't override it. ### Use modify* scripts. ### ")
+                    logg.error(f"There is a missing object that you need to configure first. {response.text}")
             except requests.exceptions.RequestException as e:
-#                logg.error(f"An error occurred while making the request: {e}")
-                print(f"An error occurred while making the request: {e}")
+                logg.error(f"An error occurred while making the request: {e}")
             else:
-                #logg.info(f"Profile {profile['name']} has been created. ")
-                print(f"Profile {profile['name']} has been created. ")
+                logg.info(f"Profile {profile['name']} has been created. ")
 
 
 if __name__ == "__main__":
