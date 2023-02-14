@@ -48,7 +48,6 @@ pipeline {
             allowMissing: false, 
             alwaysLinkToLastBuild: false, 
             keepAll: false, 
-            reportDir: '$WORKSPACE', 
             reportFiles: 'edges_${service}.html', 
             reportName: '${service}'
         ])
