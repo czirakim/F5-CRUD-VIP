@@ -41,5 +41,18 @@ pipeline {
         sh 'python3 $WORKSPACE/graph.py ${service} 2>&1'
       }
     }
+
+    stage('Publish HTML Report') {
+      steps {
+        publishHTML(target: [
+            allowMissing: false, 
+            alwaysLinkToLastBuild: false, 
+            keepAll: false, 
+            reportDir: '$WORKSPACE', 
+            reportFiles: 'edges_${service}.html', 
+            reportName: '${service}'
+        ])
+      }
+    }
   }
 }
