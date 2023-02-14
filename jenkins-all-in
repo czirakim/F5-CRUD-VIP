@@ -1,8 +1,8 @@
 pipeline {
   agent any
   parameters {
-    string(name: 'service', defaultValue: 'default_value', description: 'service parameter')
-    string(name: 'action', defaultValue: 'default_value', description: 'action parameter')
+    string(name: 'service', defaultValue: 'default_value', description: 'what service do you want to play with?')
+    string(name: 'action', defaultValue: 'default_value', description: 'action: create/modify/delete')
         }
   stages {
     stage('Build') {
