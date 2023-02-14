@@ -17,6 +17,7 @@ pipeline {
     stage('Pre-test') {
       steps {
         echo 'Running pre-test...'
+        sh 'python3 $WORKSPACE/Tests/pre_test.py ${service} 2>&1'
       }
     }
 
