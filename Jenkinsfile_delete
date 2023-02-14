@@ -31,6 +31,7 @@ pipeline {
     stage('Post_test') {
       steps {
         echo 'Running post-test...'
+        sh 'python3 $WORKSPACE/Tests/post_delete_test.py ${service} 2>&1'
       }
     }
 
