@@ -23,7 +23,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying the application...'
-        sh 'python3 $WORKSPACE/create_profiles.py ${service} 2>&1'
+        sh 'python3 $WORKSPACE/create_vip.py ${service} 2>&1'
       }
     }
 

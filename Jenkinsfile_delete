@@ -17,14 +17,14 @@ pipeline {
     stage('Pre-test') {
       steps {
         echo 'Running pre-test...'
-        sh 'python3 $WORKSPACE/Tests/pre_delete_test.py ${service} 2>&1'
+        sh 'python3 $WORKSPACE/Tests/pre_test.py ${service} 2>&1'
       }
     }
 
     stage('Delete') {
       steps {
         echo 'Deploying the application...'
-        sh 'python3 $WORKSPACE/delete_profiles.py ${service} 2>&1'
+        sh 'python3 $WORKSPACE/delete_vip.py ${service} 2>&1'
       }
     }
 
