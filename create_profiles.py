@@ -21,10 +21,9 @@ logg.addHandler(logger())
 # F5 device
 IP_ADDRESS = "192.168.88.100"
 
-# Get the current working directory and build the path for teh json file
+# Get the current working directory and build the path for the json file
 cwd = os.getcwd()
 path = f"{cwd}/{sys.argv[1]}"
-# path = f"./{sys.argv[1]}"
 data_file = f"{path}/profiles.json"
 
 

@@ -1,17 +1,9 @@
 # Use an official ubuntu image as the base image
 FROM ubuntu:latest
 
-# specify shell
-#SHELL ["/bin/bash", "-c"]
-
-# This line adds the Jenkins user to the /etc/sudoers file, allowing it to run sudo commands without a password prompt
-RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-
-
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y wget && \
+    apt-get install -y wget git nano && \
     apt-get install -y default-jre && \
     apt-get install -y python3.10 python3-pip
 
@@ -22,9 +14,6 @@ RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | gpg --dea
     apt update && \
     apt-get install -y jenkins 
 
-
-# This line adds the Jenkins user to the /etc/sudoers file, allowing it to run sudo commands without a password prompt
-RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # start jenkins
 RUN service jenkins start 
@@ -37,9 +26,6 @@ COPY requirements.txt /app/
 
 # Install the packages listed in requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the files to the image
-#COPY . /app/
 
 # Expose Jenkins on port 8080
 EXPOSE 8080
