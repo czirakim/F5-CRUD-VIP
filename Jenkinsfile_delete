@@ -24,7 +24,7 @@ pipeline {
     stage('Delete') {
       steps {
         echo 'Deploying the application...'
-        sh 'python3 $WORKSPACE/delete_vip.py ${service} 2>&1'
+
       }
     }
 
