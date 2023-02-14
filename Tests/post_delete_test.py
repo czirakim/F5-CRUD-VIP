@@ -37,7 +37,7 @@ def test_http_response():
         vip_name = item['name']
         url = f"https://{IP_ADDRESS}/mgmt/tm/ltm/virtual/{vip_name}"
         response = requests.get(url, headers=headers, verify=False)
-        assert response.status_code == 404, f"Expected status code 404, but got {response.status_code}"
+        assert response.status_code == 404, f"OBJECT FOUND: Expected status code 404, but got {response.status_code}"
 
 
 if __name__ == '__main__':
