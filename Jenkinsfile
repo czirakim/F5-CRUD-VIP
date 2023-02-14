@@ -34,24 +34,5 @@ pipeline {
         sh 'python3 $WORKSPACE/Tests/post_create_test.py ${service} 2>&1'
       }
     }
-    
-    stage('Create graph') {
-      steps {
-        echo 'Running post-test...'
-        sh 'python3 $WORKSPACE/graph.py ${service} 2>&1'
-      }
-    }
-
-    stage('Publish HTML Report') {
-      steps {
-        publishHTML(target: [
-            allowMissing: false, 
-            alwaysLinkToLastBuild: false, 
-            keepAll: false, 
-            reportFiles: 'edges_${service}.html', 
-            reportName: '${service}'
-        ])
-      }
-    }
   }
 }
