@@ -7,7 +7,7 @@
         "autoLasthop": "default",
         "cmpEnabled": "yes",
         "connectionLimit": 0,
-        "destination": "/Common/10.0.0.131:80",
+        "destination": "/Common/10.0.0.121:80",
         "enabled": true,
         "gtmScore": 0,
         "ipProtocol": "tcp",
@@ -15,7 +15,7 @@
         "mirror": "disabled",
         "mobileAppTunnel": "disabled",
         "nat64": "disabled",
-        "pool": "/Common/pool2",
+        "pool": "/Common/pool1",
         "source": "0.0.0.0/0",
         "sourceAddressTranslation": {
                 "type": "automap"
