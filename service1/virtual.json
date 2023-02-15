@@ -15,7 +15,7 @@
         "mirror": "disabled",
         "mobileAppTunnel": "disabled",
         "nat64": "disabled",
-        "pool": "/Common/pool1",
+        "pool": "/Common/pool2",
         "source": "0.0.0.0/0",
         "sourceAddressTranslation": {
                 "type": "automap"
