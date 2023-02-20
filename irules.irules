@@ -1,0 +1,26 @@
+# testing
+when HTTP_REQUEST { 
+      if { ([HTTP::host] == \"www.xyzabc.com\") and ([string tolower [HTTP::uri]] contains \"test1\") }{
+            log local0. \"select pool 21\"
+            pool pool21 } 
+      elseif { [HTTP::uri] starts_with \"/foobar/test\" }
+            {  pool pool11 } 
+      } 
+
+# 2nd test
+when HTTP_REQUEST {
+  switch -glob [HTTP::uri] {
+    "/foo*" {
+      pool pool1
+    }
+   "*bar" {
+      pool pool11
+    }
+    "/foobar[a-zA-Z]" {
+      pool21
+    }
+    "/foo?bar" {
+     pool1
+    }
+  }
+}

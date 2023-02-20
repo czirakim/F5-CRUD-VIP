@@ -96,8 +96,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#3155a8", "id": 1001, "label": "VIP2 \n 10.0.0.112:80", "shape": "dot"}, {"color": "#3da831", "id": 501, "label": "pool2 \n ratio-node", "shape": "dot"}, {"color": "#9a31a8", "id": 1, "label": "9.9.9.9:80", "shape": "dot"}, {"color": "#9a31a8", "id": 2, "label": "2.2.2.1:80", "shape": "dot"}, {"color": "#9a31a8", "id": 3, "label": "3.3.3.3:80", "shape": "dot"}]);
-                  edges = new vis.DataSet([{"from": 1001, "to": 501, "width": 5}, {"from": 501, "to": 1, "width": 2}, {"from": 501, "to": 2, "width": 2}, {"from": 501, "to": 3, "width": 2}]);
+                  nodes = new vis.DataSet([{"color": "#3155a8", "id": 1001, "label": "VIP2 \n 10.0.0.112:80", "shape": "dot"}, {"color": "#3da831", "id": 501, "label": "pool2 \n ratio-node", "shape": "dot"}, {"color": "#9a31a8", "id": 1, "label": "9.9.9.9:80", "shape": "dot"}, {"color": "#9a31a8", "id": 2, "label": "2.2.2.1:80", "shape": "dot"}, {"color": "#9a31a8", "id": 3, "label": "3.3.3.3:80", "shape": "dot"}, {"color": "#3da831", "id": 502, "label": "pool22 \n ratio-node", "shape": "dot"}, {"color": "#9a31a8", "id": 4, "label": "29.29.29.29:80", "shape": "dot"}, {"color": "#9a31a8", "id": 5, "label": "22.22.22.21:80", "shape": "dot"}, {"color": "#9a31a8", "id": 6, "label": "23.23.23.23:80", "shape": "dot"}, {"color": "#3da831", "id": 503, "label": "pool22 \n ratio-node", "shape": "dot"}, {"color": "#9a31a8", "id": 7, "label": "29.29.29.29:80", "shape": "dot"}, {"color": "#9a31a8", "id": 8, "label": "22.22.22.21:80", "shape": "dot"}, {"color": "#9a31a8", "id": 9, "label": "23.23.23.23:80", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": 1001, "label": "default", "to": 501}, {"from": 501, "to": 1, "width": 2}, {"from": 501, "to": 2, "width": 2}, {"from": 501, "to": 3, "width": 2}, {"from": 1001, "label": "/test2", "to": 502}, {"from": 502, "to": 4, "width": 2}, {"from": 502, "to": 5, "width": 2}, {"from": 502, "to": 6, "width": 2}, {"from": 1001, "label": "/foo", "to": 503}, {"from": 503, "to": 7, "width": 2}, {"from": 503, "to": 8, "width": 2}, {"from": 503, "to": 9, "width": 2}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -117,15 +117,28 @@
         "color": {
             "inherit": true
         },
-        "smooth": {
-            "enabled": true,
-            "type": "dynamic"
-        }
+        "font": {
+            "align": "top"
+        },
+        "selfReference": {
+            "angle": 0.7853981633974483
+        },
+        "selfReferenceSize": 0,
+        "smooth": false
     },
     "interaction": {
         "dragNodes": true,
         "hideEdgesOnDrag": false,
         "hideNodesOnDrag": false
+    },
+    "layout": {
+        "hierarchical": {
+            "direction": "DU",
+            "enabled": true,
+            "levelSeparation": -200,
+            "shakeTowards": "roots",
+            "sortMethod": "directed"
+        }
     },
     "physics": {
         "enabled": true,

@@ -14,5 +14,21 @@
 				"name": "3.3.3.3:80"
 			} 
 		] 
+ 	},
+	 { 
+		"name": "pool22", 
+		"loadBalancingMode": "ratio-node", 
+		"monitor": "/Common/tcp", 
+		"members": [ 
+			{
+				"name": "29.29.29.29:80"
+			},
+			{
+				"name": "22.22.22.21:80"
+			},
+			{
+				"name": "23.23.23.23:80"
+			} 
+		] 
  	}
 ]	

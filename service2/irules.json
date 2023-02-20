@@ -1,8 +1,16 @@
 [
     {
         "name": "example_rule_2",
-        "apiAnonymous": "when HTTP_REQUEST { \n   if { ([HTTP::host] == \"www.abc.com\") and ([string tolower [HTTP::uri]] contains \"test2\") }{       
-        HTTP::respond 403 content \"You don't have authorization to view this page. Access Denied\" noserver Content-Type text/html Connection Close Cache-Control no-cache       
-        log local0. \"deny URI: [HTTP::uri]\" } \n  } "
+        "apiAnonymous": "when HTTP_REQUEST { \n   if { ([HTTP::host] == \"www.abc.com\") and ([string tolower [HTTP::uri]] contains \"/test2\") }{       
+        pool pool22      
+        log local0. \" uri test\" } \n  } "
+    },
+    {
+        "name": "example_rule_22",
+        "apiAnonymous":"when HTTP_REQUEST {   \n    switch [HTTP::uri] {       
+        \"/foo\" {\n            pool pool22\n            }             
+        \"/fobar\" {\n            pool pool22\n            }       
+        default {\n            pool pool2\n            }\n   }\n}"
     }
+
 ]
