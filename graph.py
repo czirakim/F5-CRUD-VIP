@@ -29,7 +29,7 @@ options = {
   "layout": {
     "hierarchical": {
       "enabled": True,
-      "levelSeparation": -200,
+      "levelSeparation": -240,
       "direction": "DU",
       "sortMethod": "directed",
       "shakeTowards": "roots"
@@ -124,14 +124,14 @@ def add_obj():
             itemI = read_file(irule_file)
             for item in itemI:
                 data1 = item["apiAnonymous"]
-                # irule_name = item["name"]
+                irule_name = item["name"]
                 uri, pool = get_uri_pool_IF(data1)
                 print(pool)
                 for name in pool:
                     # with uri
-                    pools, nodes = vip2nodes(vips, pools, nodes, name, items, uri)
+                    # pools, nodes = vip2nodes(vips, pools, nodes, name, items, uri)
                     # with irule name
-                    # pools, nodes = vip2nodes(vips, pools, nodes, name, items, irule_name)
+                    pools, nodes = vip2nodes(vips, pools, nodes, name, items, irule_name)
 
 
 if __name__ == "__main__":

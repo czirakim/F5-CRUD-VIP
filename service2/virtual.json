@@ -31,7 +31,8 @@
             { "name": "http_max_requests" }
                     ],
         "rules": [
-                "example_rule_2"
+                "example_rule_2",
+                "example_rule_22"
             ]
     }
 ]
