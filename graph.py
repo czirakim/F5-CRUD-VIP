@@ -81,7 +81,7 @@ def vip2nodes(vips, pools, nodes, pool_name, items, label_string):
 
 # get the uri in if statements
 def get_uri_pool_IF(item):
-    tmp = re.findall(r"\[HTTP::uri\](.*) ", item)
+    tmp = re.findall(r"\[HTTP::uri\](.*)", item)
     tmp1 = tmp[0].split('"')
     uri = 'uri:'+tmp1[1]
     pool = re.findall(r"pool (.*?) ", item)

@@ -19,12 +19,13 @@ logg.setLevel(logging.INFO)
 logg.addHandler(logger())
 
 # F5 device
-IP_ADDRESS = "192.168.88.100"
+IP_ADDRESS = os.environ.get('IP_ADDRESS')
 
 # Get the current working directory and build the path for teh json file
 cwd = os.getcwd()
 path = f"{cwd}/{sys.argv[1]}"
 data_file = f"{path}/irules.json"
+
 
 
 def list_irule():

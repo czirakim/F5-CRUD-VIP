@@ -32,14 +32,11 @@
             {
                 "kind": "tm:ltm:profile:client-ssl:client-sslstate",
                 "name": "vip1-ssl",
-                "cert": "/Common/VIP1.crt",    
-                "chain": "/Common/default.crt",    
                 "cipherGroup": "/Common/f5-aes",    
                 "ciphers": "none",
                 "clientCertCa": "none",
                 "crlFile": "none",
                 "defaultsFrom": "/Common/clientssl",    
-                "key": "/Common/VIP1.key",    
                 "mode": "enabled",
                 "notifyCertStatusToVirtualServer": "disabled",
                 "secureRenegotiation": "require",
@@ -47,9 +44,9 @@
                     {
                         "name": "VIP1_default",
                         "appService": "none",
-                        "cert": "/Common/VIP1.crt",           
+                        "cert": "/Common/VIP1",           
                         "chain": "/Common/default.crt" ,         
-                        "key": "/Common/VIP1.key"           
+                        "key": "/Common/VIP1"           
                     }
                 ]
             }
